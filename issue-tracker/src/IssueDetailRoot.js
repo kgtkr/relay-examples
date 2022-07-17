@@ -14,7 +14,7 @@ export default function IssueDetailRoot(props) {
   // actually fetching this data belongs to the route definition: it calls
   // preloadQuery() with the query and variables, and the result is passed
   // on props.prepared.issueDetailQuery - see src/routes.js
-  const { node: issue, searchResult } = usePreloadedQuery(
+  const { node: issue, ...searchResult } = usePreloadedQuery(
     graphql`
       query IssueDetailRootQuery($id: ID!) {
         node(id: $id) {
@@ -32,9 +32,7 @@ export default function IssueDetailRoot(props) {
             ...IssueActions_issue
           }
         }
-        searchResult: relay {
-          ...IssueDetailComments_search
-        }
+        ...IssueDetailComments_search
       }
     `,
     props.prepared.issueDetailQuery,
