@@ -44,6 +44,24 @@ export default function IssueDetailComments(props) {
     `,
     props.issue,
   );
+  const pagination = usePaginationFragment(
+    graphql`
+      fragment IssueDetailComments_search on Query
+        @argumentDefinitions(
+          cursor: { type: "String" }
+          count: { type: "Int", defaultValue: 10 }
+        )
+        @refetchable(queryName: "IssueDetailCommentsSearchQuery") {
+        search(query: "relay", type: REPOSITORY, first: $count, after: $cursor)
+          @connection(key: "IssueDetailComments_search") {
+          edges {
+            __id
+          }
+        }
+      }
+    `,
+    props.searchResult,
+  );
   // Individual comments may suspend while any images are loading (for the
   // author avatar or content within the comment body). Using `useTransition()`
   // allows us to continue showing existing comments while the next page of
@@ -113,6 +131,17 @@ export default function IssueDetailComments(props) {
           {isPending || isLoadingNext ? 'Loading...' : 'Load More'}
         </button>
       ) : null}
+      <h2>pagination</h2>
+      {pagination.data.search.edges.map(edge => (
+        <div key={edge.__id}>{edge.__id}</div>
+      ))}
+      <button
+        onClick={() => {
+          pagination.loadNext();
+        }}
+      >
+        loadMore
+      </button>
     </>
   );
 }

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c8ec6403739d628287512607a8e6d45e>>
+ * @generated SignedSource<<3ca155f96ef253dbda6c1b3999d9a48d>>
  * @flow
  * @lightSyntaxTransform
  * @nogrep
@@ -13,6 +13,7 @@
 import type { ConcreteRequest, Query } from 'relay-runtime';
 type IssueActions_issue$fragmentType = any;
 type IssueDetailComments_issue$fragmentType = any;
+type IssueDetailComments_search$fragmentType = any;
 export type IssueDetailRootQuery$variables = {|
   id: string,
 |};
@@ -28,6 +29,9 @@ export type IssueDetailRootQuery$data = {|
     +title?: string,
     +url?: any,
     +$fragmentSpreads: IssueActions_issue$fragmentType & IssueDetailComments_issue$fragmentType,
+  |},
+  +searchResult: {|
+    +$fragmentSpreads: IssueDetailComments_search$fragmentType,
   |},
 |};
 export type IssueDetailRootQuery = {|
@@ -115,6 +119,14 @@ v10 = {
   "storageKey": null
 },
 v11 = {
+  "kind": "InlineFragment",
+  "selections": [
+    (v10/*: any*/)
+  ],
+  "type": "Node",
+  "abstractKey": "__isNode"
+},
+v12 = {
   "alias": null,
   "args": null,
   "concreteType": null,
@@ -125,22 +137,73 @@ v11 = {
     (v9/*: any*/),
     (v4/*: any*/),
     (v5/*: any*/),
+    (v11/*: any*/)
+  ],
+  "storageKey": null
+},
+v13 = {
+  "kind": "Literal",
+  "name": "first",
+  "value": 10
+},
+v14 = [
+  (v13/*: any*/)
+],
+v15 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "cursor",
+  "storageKey": null
+},
+v16 = {
+  "kind": "ClientExtension",
+  "selections": [
     {
-      "kind": "InlineFragment",
-      "selections": [
-        (v10/*: any*/)
-      ],
-      "type": "Node",
-      "abstractKey": "__isNode"
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "__id",
+      "storageKey": null
+    }
+  ]
+},
+v17 = {
+  "alias": null,
+  "args": null,
+  "concreteType": "PageInfo",
+  "kind": "LinkedField",
+  "name": "pageInfo",
+  "plural": false,
+  "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "endCursor",
+      "storageKey": null
+    },
+    {
+      "alias": null,
+      "args": null,
+      "kind": "ScalarField",
+      "name": "hasNextPage",
+      "storageKey": null
     }
   ],
   "storageKey": null
 },
-v12 = [
+v18 = [
+  (v13/*: any*/),
   {
     "kind": "Literal",
-    "name": "first",
-    "value": 10
+    "name": "query",
+    "value": "relay"
+  },
+  {
+    "kind": "Literal",
+    "name": "type",
+    "value": "REPOSITORY"
   }
 ];
 return {
@@ -195,6 +258,22 @@ return {
           }
         ],
         "storageKey": null
+      },
+      {
+        "alias": "searchResult",
+        "args": null,
+        "concreteType": "Query",
+        "kind": "LinkedField",
+        "name": "relay",
+        "plural": false,
+        "selections": [
+          {
+            "args": null,
+            "kind": "FragmentSpread",
+            "name": "IssueDetailComments_search"
+          }
+        ],
+        "storageKey": null
       }
     ],
     "type": "Query",
@@ -221,13 +300,13 @@ return {
             "selections": [
               (v2/*: any*/),
               (v3/*: any*/),
-              (v11/*: any*/),
+              (v12/*: any*/),
               (v6/*: any*/),
               (v7/*: any*/),
               (v8/*: any*/),
               {
                 "alias": null,
-                "args": (v12/*: any*/),
+                "args": (v14/*: any*/),
                 "concreteType": "IssueCommentConnection",
                 "kind": "LinkedField",
                 "name": "comments",
@@ -250,65 +329,24 @@ return {
                         "plural": false,
                         "selections": [
                           (v10/*: any*/),
-                          (v11/*: any*/),
+                          (v12/*: any*/),
                           (v6/*: any*/),
                           (v9/*: any*/)
                         ],
                         "storageKey": null
                       },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "cursor",
-                        "storageKey": null
-                      },
-                      {
-                        "kind": "ClientExtension",
-                        "selections": [
-                          {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "__id",
-                            "storageKey": null
-                          }
-                        ]
-                      }
+                      (v15/*: any*/),
+                      (v16/*: any*/)
                     ],
                     "storageKey": null
                   },
-                  {
-                    "alias": null,
-                    "args": null,
-                    "concreteType": "PageInfo",
-                    "kind": "LinkedField",
-                    "name": "pageInfo",
-                    "plural": false,
-                    "selections": [
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "endCursor",
-                        "storageKey": null
-                      },
-                      {
-                        "alias": null,
-                        "args": null,
-                        "kind": "ScalarField",
-                        "name": "hasNextPage",
-                        "storageKey": null
-                      }
-                    ],
-                    "storageKey": null
-                  }
+                  (v17/*: any*/)
                 ],
                 "storageKey": "comments(first:10)"
               },
               {
                 "alias": null,
-                "args": (v12/*: any*/),
+                "args": (v14/*: any*/),
                 "filters": null,
                 "handle": "connection",
                 "key": "IssueDetailComments_comments",
@@ -321,21 +359,82 @@ return {
           }
         ],
         "storageKey": null
+      },
+      {
+        "alias": "searchResult",
+        "args": null,
+        "concreteType": "Query",
+        "kind": "LinkedField",
+        "name": "relay",
+        "plural": false,
+        "selections": [
+          {
+            "alias": null,
+            "args": (v18/*: any*/),
+            "concreteType": "SearchResultItemConnection",
+            "kind": "LinkedField",
+            "name": "search",
+            "plural": false,
+            "selections": [
+              {
+                "alias": null,
+                "args": null,
+                "concreteType": "SearchResultItemEdge",
+                "kind": "LinkedField",
+                "name": "edges",
+                "plural": true,
+                "selections": [
+                  (v15/*: any*/),
+                  {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": null,
+                    "kind": "LinkedField",
+                    "name": "node",
+                    "plural": false,
+                    "selections": [
+                      (v9/*: any*/),
+                      (v11/*: any*/)
+                    ],
+                    "storageKey": null
+                  },
+                  (v16/*: any*/)
+                ],
+                "storageKey": null
+              },
+              (v17/*: any*/)
+            ],
+            "storageKey": "search(first:10,query:\"relay\",type:\"REPOSITORY\")"
+          },
+          {
+            "alias": null,
+            "args": (v18/*: any*/),
+            "filters": [
+              "query",
+              "type"
+            ],
+            "handle": "connection",
+            "key": "IssueDetailComments_search",
+            "kind": "LinkedHandle",
+            "name": "search"
+          }
+        ],
+        "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "4895b96aa0973924dd3ebfa37d637417",
+    "cacheID": "2983e4d47a23a220beb8604f991a6f0f",
     "id": null,
     "metadata": {},
     "name": "IssueDetailRootQuery",
     "operationKind": "query",
-    "text": "query IssueDetailRootQuery(\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ... on Issue {\n      title\n      number\n      author {\n        __typename\n        login\n        avatarUrl\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      body\n      closed\n      url\n      ...IssueDetailComments_issue\n      ...IssueActions_issue\n    }\n    id\n  }\n}\n\nfragment IssueActions_issue on Issue {\n  id\n  closed\n}\n\nfragment IssueDetailComments_issue on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n"
+    "text": "query IssueDetailRootQuery(\n  $id: ID!\n) {\n  node(id: $id) {\n    __typename\n    ... on Issue {\n      title\n      number\n      author {\n        __typename\n        login\n        avatarUrl\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n      body\n      closed\n      url\n      ...IssueDetailComments_issue\n      ...IssueActions_issue\n    }\n    id\n  }\n  searchResult: relay {\n    ...IssueDetailComments_search\n  }\n}\n\nfragment IssueActions_issue on Issue {\n  id\n  closed\n}\n\nfragment IssueDetailComments_issue on Issue {\n  comments(first: 10) {\n    edges {\n      node {\n        id\n        author {\n          __typename\n          login\n          avatarUrl\n          ... on Node {\n            __isNode: __typename\n            id\n          }\n        }\n        body\n        __typename\n      }\n      cursor\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n  id\n}\n\nfragment IssueDetailComments_search on Query {\n  search(query: \"relay\", type: REPOSITORY, first: 10) {\n    edges {\n      cursor\n      node {\n        __typename\n        ... on Node {\n          __isNode: __typename\n          id\n        }\n      }\n    }\n    pageInfo {\n      endCursor\n      hasNextPage\n    }\n  }\n}\n"
   }
 };
 })();
 
-(node/*: any*/).hash = "42e7a1bc529086397c84040c8f84c752";
+(node/*: any*/).hash = "f97e9f3559b772b5ca3a1a666c5ef268";
 
 module.exports = ((node/*: any*/)/*: Query<
   IssueDetailRootQuery$variables,
